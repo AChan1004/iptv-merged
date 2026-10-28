@@ -1,0 +1,35 @@
+name: Update selected Hong Kong playlist
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 22 * * *'
+  push:
+    branches: [main]
+    paths: ['merge.py', 'build_selected.py', '.github/workflows/selected.yml']
+permissions:
+  contents: write
+concurrency:
+  group: update-playlist
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build selected playlist
+        run: python build_selected.py
+      - name: Publish
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hk_selected.m3u
+          if git diff --cached --quiet; then
+            echo 'No changes'
+          else
+            git commit -m 'Update selected Hong Kong playlist'
+            git push
+          fi
