@@ -1,5 +1,5 @@
 {
-  "entries": 11393,
+  "entries": 11392,
   "sources": [
     {
       "source": "https://raw.githubusercontent.com/sammy0101/hk-iptv-auto/refs/heads/main/hk_live.m3u",
@@ -13,8 +13,8 @@
     },
     {
       "source": "https://epg.pw/test_channels_hong_kong.m3u",
-      "entries": 15,
-      "added": 15
+      "entries": 14,
+      "added": 14
     },
     {
       "source": "https://iptv-org.github.io/iptv/index.m3u",
